@@ -19,16 +19,4 @@ public class ReactTodoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReactTodoApplication.class, args);
 	}
-
-	@Bean
-	CommandLineRunner commandLineRunner(TaskService taskService) {
-		return args -> {
-			Task task = new Task("Do it now", "DONE");
-			Task task1 = new Task("Do it !!", "TASKTODO");
-			Task task2 = new Task(TaskStatus.DONE, "JUST DO IT", "DONE");
-			taskService.addTask(task);
-			taskService.addTask(task1);
-			taskService.addTask(task2);
-		};
-	}
 }

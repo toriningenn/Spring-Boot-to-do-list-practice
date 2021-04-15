@@ -26,15 +26,21 @@ public class TaskService {
         taskRepository.save(task);
     }
 
-    public void changeStatus(int id) {
+    public Task changeStatus(int id) {
         if (taskRepository.findById(id).isPresent()) {
             Task taskToChange = taskRepository.findById(id).get();
-            if (taskToChange.getStatus() == TaskStatus.DONE) {
+            if (taskToChange.getStatusString().equals("DONE")) {
                 taskToChange.setStatus(TaskStatus.TASKTODO);
             } else {
                 taskToChange.setStatus(TaskStatus.DONE);
             }
             taskRepository.save(taskToChange);
+            return taskToChange;
         }
+        return null;
+    }
+
+    public Optional<Task> getById(int id) {
+       return taskRepository.findById(id);
     }
 }
