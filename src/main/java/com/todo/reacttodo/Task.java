@@ -3,6 +3,7 @@ package com.todo.reacttodo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table
@@ -12,10 +13,12 @@ public class Task {
             sequenceName = "task_sequence",
             allocationSize = 1
     )
-    @GeneratedValue(generator = "task_sequence")
+    @GeneratedValue(generator = "task_sequence",
+            strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "Task can't be blank")
     private String task;
 
     @Column
